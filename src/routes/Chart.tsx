@@ -69,7 +69,6 @@ const Chart: FunctionComponent<CharProps> = ({ coindId }) => {
             xaxis: {
               type: 'datetime',
             },
-            colors: ['#0fbcf9'],
             tooltip: {
               y: {
                 formatter: value => `$${value.toFixed(2)}`,
