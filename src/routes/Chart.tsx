@@ -30,8 +30,21 @@ const Chart: FunctionComponent<CharProps> = ({ coindId }) => {
         'Loading chart...'
       ) : (
         <ApexChart
-          type="line"
-          series={[{ name: 'Price', data: data?.map(price => price.close) }]}
+          type="candlestick"
+          series={[
+            {
+              name: 'Price',
+              data: data?.map(price => ({
+                x: price.time_close,
+                y: [
+                  price.open.toFixed(2),
+                  price.high.toFixed(2),
+                  price.low.toFixed(2),
+                  price.close.toFixed(2),
+                ],
+              })),
+            },
+          ]}
           options={{
             theme: {
               mode: 'dark',
@@ -39,37 +52,22 @@ const Chart: FunctionComponent<CharProps> = ({ coindId }) => {
             chart: {
               height: 300,
               width: 500,
+              background: 'transparent',
               toolbar: {
                 show: false,
               },
-              background: 'transparent',
-            },
-            grid: {
-              show: false,
             },
             stroke: {
               curve: 'smooth',
               width: 5,
             },
             yaxis: {
-              show: false,
+              tooltip: {
+                enabled: true,
+              },
             },
             xaxis: {
-              labels: {
-                show: false,
-              },
-              axisBorder: {
-                show: false,
-              },
-              axisTicks: {
-                show: false,
-              },
               type: 'datetime',
-              categories: data?.map(price => price.time_close),
-            },
-            fill: {
-              type: 'gradient',
-              gradient: { gradientToColors: ['#0be881'], stops: [0, 100] },
             },
             colors: ['#0fbcf9'],
             tooltip: {
