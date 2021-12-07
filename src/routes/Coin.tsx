@@ -1,4 +1,5 @@
 import {
+  useHistory,
   useLocation,
   useParams,
   Switch,
@@ -13,6 +14,8 @@ import styled from 'styled-components';
 import Price from './Price';
 import Chart from './Chart';
 
+import { ReactComponent as _BackButtonIcon } from 'icons/ic-back.svg';
+
 import type { FunctionComponent } from 'react';
 
 const Container = styled.div`
@@ -23,14 +26,37 @@ const Container = styled.div`
 
 const Header = styled.header`
   height: 10vh;
+
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  flex: 1;
 `;
 
 const Title = styled.h1`
   font-size: 48px;
   color: ${props => props.theme.accentColor};
+`;
+
+const BackButton = styled.a`
+  display: flex;
+  align-items: center;
+  flex: 1;
+  font-size: 20px;
+`;
+
+const BackButtonContainer = styled.div`
+  display: flex;
+  cursor: pointer;
+  gap: 4px;
+`;
+
+const BackButtonIcon = styled(_BackButtonIcon)`
+  width: 20px;
+`;
+
+const Empty = styled.div`
+  flex: 1;
 `;
 
 const Loader = styled.span`
@@ -154,6 +180,7 @@ interface PriceData {
 }
 
 const Coin: FunctionComponent = () => {
+  const history = useHistory();
   const { state } = useLocation<RouteState>();
   const { coinId } = useParams<RouteParams>();
   const priceMatch = useRouteMatch('/:coinId/price');
@@ -171,6 +198,10 @@ const Coin: FunctionComponent = () => {
     }
   );
 
+  const handleBackButton = () => {
+    history.goBack();
+  };
+
   const loading = infoLoading || tickersLoading;
   return (
     <Container>
@@ -180,9 +211,16 @@ const Coin: FunctionComponent = () => {
         </title>
       </Helmet>
       <Header>
+        <BackButton>
+          <BackButtonContainer onClick={handleBackButton}>
+            <BackButtonIcon />
+            Back
+          </BackButtonContainer>
+        </BackButton>
         <Title>
           {state?.name ? state.name : loading ? 'Loading...' : infoData?.name}
         </Title>
+        <Empty />
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
@@ -216,10 +254,14 @@ const Coin: FunctionComponent = () => {
 
           <Tabs>
             <Tab isActive={chartMatch !== null}>
-              <Link to={`/${coinId}/chart`}>Chart</Link>
+              <Link to={`/${coinId}/chart`} replace>
+                Chart
+              </Link>
             </Tab>
             <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinId}/price`}>Price</Link>
+              <Link to={`/${coinId}/price`} replace>
+                Price
+              </Link>
             </Tab>
           </Tabs>
 
