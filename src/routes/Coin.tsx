@@ -2,10 +2,10 @@ import {
   useHistory,
   useLocation,
   useParams,
+  useRouteMatch,
   Switch,
   Route,
   Link,
-  useRouteMatch,
 } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Helmet } from 'react-helmet';
