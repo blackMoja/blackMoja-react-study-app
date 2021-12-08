@@ -76,10 +76,6 @@ const Price: FunctionComponent<PriceProps> = ({ coindId }) => {
     return ((current - prev) / current) * 100;
   };
 
-  const percentageText = (percent: number) => {
-    return;
-  };
-
   const openPercentage = getPercentage(diffData[0].open, diffData[1].open);
   const closePercentage = getPercentage(diffData[0].close, diffData[1].close);
   const highPercentage = getPercentage(diffData[0].high, diffData[1].high);
