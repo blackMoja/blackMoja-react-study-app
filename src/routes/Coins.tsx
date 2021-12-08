@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Helmet } from 'react-helmet';
 import { fetchCoins } from 'api';
+
 import type { FunctionComponent } from 'react';
 
 const Container = styled.div`
@@ -22,7 +23,7 @@ const CoinsList = styled.ul``;
 
 const Coin = styled.li`
   background-color: white;
-  color: ${props => props.theme.bgColor};
+  color: ${props => props.theme.textColor};
   border-radius: 15px;
   margin-bottom: 10px;
 
