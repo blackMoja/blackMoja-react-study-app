@@ -55,5 +55,5 @@
     "@types/react-helmet": "^6.1.4",
     "@types/react-router-dom": "^5.3.2"
   },
-  "homepage": "https://blackmoja.github.io/react-study-nomard"
+  "homepage": "https://blackmoja.github.io/blackMoja-react-study-app"
 }
