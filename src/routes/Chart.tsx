@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query';
-import { fetchCoinHistory } from 'api';
 import ApexChart from 'react-apexcharts';
+import { fetchCoinHistory } from 'api';
 import type { FunctionComponent } from 'react';
 
-interface CharProps {
+interface ChartProps {
   coindId: string;
 }
 
@@ -18,7 +18,7 @@ interface IHistoricalData {
   market_cap: number;
 }
 
-const Chart: FunctionComponent<CharProps> = ({ coindId }) => {
+const Chart: FunctionComponent<ChartProps> = ({ coindId }) => {
   const { isLoading, data } = useQuery<IHistoricalData[]>(
     ['ohlcv', coindId],
     () => fetchCoinHistory(coindId)

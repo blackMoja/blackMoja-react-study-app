@@ -267,7 +267,7 @@ const Coin: FunctionComponent = () => {
 
           <Switch>
             <Route path={`/${coinId}/price`}>
-              <Price />
+              <Price coindId={coinId} />
             </Route>
             <Route path={`/${coinId}/chart`}>
               <Chart coindId={coinId} />
