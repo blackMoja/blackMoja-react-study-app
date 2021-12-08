@@ -6,7 +6,7 @@ import Coin from 'routes/Coin';
 
 const Router: FunctionComponent = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Switch>
         <Route path="/:coinId">
           <Coin />
