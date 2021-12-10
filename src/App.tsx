@@ -1,9 +1,5 @@
-import { useState } from 'react';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import Router from './Router';
-import { lightTheme, darkTheme } from './theme';
 
 import type { FunctionComponent } from 'react';
 
@@ -27,18 +23,9 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App: FunctionComponent = () => {
-  const [isDark, setIsDark] = useState(false);
-
-  const toggleDark = () => setIsDark(current => !current);
-
   return (
     <>
-      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <button onClick={toggleDark}>Toggle Mode</button>
-        <GlobalStyle />
-        <Router />
-        <ReactQueryDevtools initialIsOpen={true} />
-      </ThemeProvider>
+      <GlobalStyle />
     </>
   );
 };
