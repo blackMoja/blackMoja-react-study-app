@@ -1,7 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import ToDoList from 'ToDoList';
 
-import type { FunctionComponent } from 'react';
+import type { FC } from 'react';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -22,10 +23,11 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const App: FunctionComponent = () => {
+const App: FC = () => {
   return (
     <>
       <GlobalStyle />
+      <ToDoList />
     </>
   );
 };
