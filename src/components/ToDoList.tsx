@@ -9,7 +9,7 @@ const ToDoList: FC = () => {
   const toDos = useRecoilValue(toDoState);
 
   return (
-    <div>
+    <div className="">
       <h1>To Dos</h1>
       <hr />
       <CreateToDo />
