@@ -10,7 +10,7 @@ const ToDoList: FC = () => {
 
   return (
     <div>
-      <h1>To Dos</h1>
+      <h1>To Do</h1>
       <hr />
       <CreateToDo />
       <ul>
