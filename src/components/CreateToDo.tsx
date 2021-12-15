@@ -14,10 +14,11 @@ const CreateToDo: FC = () => {
   const category = useRecoilValue(categoryState);
 
   const onSubmit = ({ toDo }: FormType) => {
-    setToDos(oldToDos => [
-      ...oldToDos,
-      { id: Date.now(), text: toDo, category },
-    ]);
+    setToDos(oldToDos => {
+      const toDoList = [...oldToDos, { id: Date.now(), text: toDo, category }];
+      window.localStorage.setItem('toDoList', JSON.stringify(toDoList));
+      return toDoList;
+    });
     setValue('toDo', '');
   };
 

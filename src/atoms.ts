@@ -17,7 +17,12 @@ const categoryState = atom<Categories>({
   default: Categories.TO_DO,
 });
 
-const toDoState = atom<ToDoType[]>({ key: 'toDo', default: [] });
+const INIT_DATA =
+  JSON.parse(window.localStorage.getItem('toDoList') || '') ?? [];
+const toDoState = atom<ToDoType[]>({
+  key: 'toDo',
+  default: INIT_DATA,
+});
 
 const toDoSelector = selector({
   key: 'toDoSelector',

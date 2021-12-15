@@ -15,12 +15,23 @@ const ToDo: FC<ToDoType> = ({ text, category, id }) => {
     setToDos(oldToDos => {
       const targetIndex = oldToDos.findIndex(toDo => toDo.id === id);
       const newToDo = { text, id, category: name as any };
-
-      return [
+      const toDoList = [
         ...oldToDos.slice(0, targetIndex),
         newToDo,
         ...oldToDos.slice(targetIndex + 1),
       ];
+
+      window.localStorage.setItem('toDoList', JSON.stringify(toDoList));
+
+      return toDoList;
+    });
+  };
+
+  const handleToDoDelete = () => {
+    setToDos(currentToDos => {
+      const toDoList = currentToDos.filter(toDo => toDo.id !== id);
+      window.localStorage.setItem('toDoList', JSON.stringify(toDoList));
+      return toDoList;
     });
   };
 
@@ -28,20 +39,21 @@ const ToDo: FC<ToDoType> = ({ text, category, id }) => {
     <li>
       <span>{text}</span>
       {category !== Categories.DOING && (
-        <button name={Categories.DOING + ''} onClick={onClick}>
+        <button name={Categories.DOING} onClick={onClick}>
           Doing
         </button>
       )}
       {category !== Categories.TO_DO && (
-        <button name={Categories.TO_DO + ''} onClick={onClick}>
+        <button name={Categories.TO_DO} onClick={onClick}>
           To DO
         </button>
       )}
       {category !== Categories.DONE && (
-        <button name={Categories.DONE + ''} onClick={onClick}>
+        <button name={Categories.DONE} onClick={onClick}>
           Done
         </button>
       )}
+      <button onClick={handleToDoDelete}>Delete</button>
     </li>
   );
 };
