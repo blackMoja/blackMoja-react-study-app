@@ -1,34 +1,35 @@
-import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
-import ToDoList from 'components/ToDoList';
+import { useRecoilState } from 'recoil';
+import { hourSelector, minuteState } from 'atoms';
 
-import type { FC } from 'react';
-
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: 'Source Sans Pro', sans-serif;
-    background-color: ${props => props.theme.bgColor};
-    color: ${props => props.theme.textColor};
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-`;
+import type { FC, FormEvent } from 'react';
 
 const App: FC = () => {
+  const [minutes, setMinutes] = useRecoilState(minuteState);
+  const [hours, setHours] = useRecoilState(hourSelector);
+
+  const handleMinutesChange = (event: FormEvent<HTMLInputElement>) => {
+    setMinutes(Number(event.currentTarget.value));
+  };
+
+  const handleHoursChange = (event: FormEvent<HTMLInputElement>) => {
+    setHours(Number(event.currentTarget.value));
+  };
+
   return (
-    <>
-      <GlobalStyle />
-      <ToDoList />
-    </>
+    <div>
+      <input
+        value={minutes}
+        onChange={handleMinutesChange}
+        type="number"
+        placeholder="minute"
+      />
+      <input
+        value={hours}
+        onChange={handleHoursChange}
+        type="number"
+        placeholder="hours"
+      />
+    </div>
   );
 };
 
