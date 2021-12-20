@@ -25,7 +25,7 @@ const App: FC = () => {
     <Wrapper>
       {/* initial props : 애니메이션을 시작하는 방식을 명시하는 props = Element의 초기 상태 */}
       <Box
-        transition={{ type: 'spring', bounce: 0.5 }}
+        transition={{ type: 'spring', delay: 0.5 }}
         initial={{ scale: 0 }}
         animate={{ scale: 1, rotate: 360 }}
       />
