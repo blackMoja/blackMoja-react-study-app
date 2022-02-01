@@ -61,6 +61,27 @@ const Box = styled(motion.div)<{ $bgPhoto: string }>`
   background-position: center center;
   height: 200px;
   font-size: 66px;
+
+  &:first-child {
+    transform-origin: center left;
+  }
+  &:last-child {
+    transform-origin: center right;
+  }
+`;
+
+const Info = styled(motion.div)`
+  opacity: 0;
+  padding: 10px;
+  background-color: ${props => props.theme.black.lighter};
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+
+  h4 {
+    text-align: center;
+    font-size: 18px;
+  }
 `;
 
 const rowVariants: Variants = {
@@ -72,6 +93,32 @@ const rowVariants: Variants = {
   },
   exit: {
     x: -window.outerWidth - 5,
+  },
+};
+
+const boxVariants: Variants = {
+  normal: {
+    scale: 1,
+  },
+  hover: {
+    scale: 1.3,
+    y: -50,
+    transition: {
+      delay: 0.5,
+      duration: 0.3,
+      type: 'tween',
+    },
+  },
+};
+
+const infoVariants: Variants = {
+  hover: {
+    opacity: 1,
+    transition: {
+      delay: 0.5,
+      duration: 0.3,
+      type: 'tween',
+    },
   },
 };
 
@@ -131,8 +178,16 @@ const Home: FC = () => {
               .map(item => (
                 <Box
                   key={item.id}
+                  variants={boxVariants}
+                  initial="normal"
+                  whileHover="hover"
+                  transition={{ type: 'tween' }}
                   $bgPhoto={makeImagePath(item.backdrop_path, 'w500')}
-                />
+                >
+                  <Info variants={infoVariants}>
+                    <h4>{item.title}</h4>
+                  </Info>
+                </Box>
               ))}
           </Row>
         </AnimatePresence>
